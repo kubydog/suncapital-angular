@@ -9,3 +9,11 @@
 form button {
   margin-bottom: 50px;
 }
+
+form input {
+  margin-bottom: 10px;
+}
+
+form input:last-of-type {
+  margin-bottom: 0;
+}

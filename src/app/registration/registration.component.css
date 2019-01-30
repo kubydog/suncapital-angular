@@ -1,0 +1,20 @@
+.form-signup {
+  max-width: 330px;
+  width: 100%;
+  padding: 15px;
+  margin: 100px auto;
+  border: 1px solid black;
+  margin-bottom: 10px;
+}
+
+form button {
+  margin-bottom: 50px;
+}
+
+form input {
+  margin-bottom: 10px;
+}
+
+form input:last-of-type {
+  margin-bottom: 0;
+}
