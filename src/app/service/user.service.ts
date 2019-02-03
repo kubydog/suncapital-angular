@@ -17,4 +17,8 @@ export class UserService {
     console.log(this.users.values());
     return true;
   }
+
+  getById(id: number): User {
+    return this.users.find(user => user.id === id);
+  }
 }
