@@ -7,6 +7,8 @@ import { MenuComponent } from './menu/menu.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ManagementComponent } from './management/management.component';
 import { ClientsComponent } from './clients/clients.component';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 @NgModule({
   imports: [
@@ -18,7 +20,9 @@ import { ClientsComponent } from './clients/clients.component';
     MenuComponent,
     DashboardComponent,
     ManagementComponent,
-    ClientsComponent
+    ClientsComponent,
+    TransactionsComponent,
+    StatisticsComponent
   ]
 })
 export class ManagementModule { }
