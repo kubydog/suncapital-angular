@@ -1,21 +1,28 @@
 import { Injectable } from '@angular/core';
-import { USERS } from '../mockdata/Users';
-import {User} from '../user';
+import { User } from '../model/user';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  users = USERS;
+  private BASE_URL = 'http://localhost:4000';
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  auth(username: string, password: string): User {
-    const user = this.users.find(u => u.email === username);
-    if (user.password === password) {
-      return user;
-    }
-    return null;
+  getToken(): string {
+    return localStorage.getItem('token');
+  }
+
+  signIn(email: string, password: string): Observable<any> {
+    const url = `${this.BASE_URL}/user/authenticate`;
+    return this.http.post<User>(url, { email, password});
+  }
+
+  signUp(user: User): Observable<User> {
+    const url = `${this.BASE_URL}/user/register`;
+    return this.http.post<User>(url, user);
   }
 }

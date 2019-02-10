@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { USERS } from '../mockdata/Users';
-import {User} from '../user';
+import {User} from '../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class UserService {
     return true;
   }
 
-  getById(id: number): User {
-    return this.users.find(user => user.id === id);
+  getById(id: string): User {
+    return this.users.find(user => user._id === id);
   }
 }

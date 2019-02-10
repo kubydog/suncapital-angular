@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from '../../user';
+import {User} from '../../model/user';
 import {UserService} from '../../service/user.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class NavigationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user = this.userService.getById(1);
+    this.user = this.userService.getById('1');
   }
 
 }

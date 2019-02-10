@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {UserService} from '../service/user.service';
 import { passwordInconformityValidator } from '../directive/password-inconformity.directive';
-import {User} from '../user';
+import {User} from '../model/user';
 import { USERS } from '../mockdata/Users';
 import {Router} from '@angular/router';
+import {Store} from '@ngrx/store';
+import {AppState} from '../store/app.states';
+import {SignUp} from '../store/user/user.actions';
 
 @Component({
   selector: 'app-registration',
@@ -19,9 +21,9 @@ export class RegistrationComponent implements OnInit {
 
   users: User[] = USERS;
 
-  constructor(private userService: UserService,
-              private formBuilder: FormBuilder,
-              private router: Router) {
+  constructor(private formBuilder: FormBuilder,
+              private router: Router,
+              private store: Store<AppState>) {
     this.registerForm = this.formBuilder.group({
       email: ['', Validators.required],
       firstName: ['', Validators.required],
@@ -39,26 +41,14 @@ export class RegistrationComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    const ids: number[] = this.users.map(user => user.id);
-    let id: number;
-    if (ids.length === 0) {
-      id = 1;
-    }
-    else {
-      id = Math.max(...ids);
-    }
-
-
-    const user: User = {
-      id: id,
+    const payload: User = {
       email: this.email.value,
       firstName: this.firstName.value,
       lastName: this.lastName.value,
       password: this.password.value,
       isAdmin: this.isAdmin.value
     };
-
-    this.userService.register(user);
+    this.store.dispatch(new SignUp(payload));
     this.router.navigate(['/login']);
   }
 
