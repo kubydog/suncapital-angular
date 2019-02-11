@@ -1,3 +1,8 @@
 .fixed-top {
   z-index: 1030;
+  height: 71px;
+}
+
+.username {
+  margin-right: 5px;
 }

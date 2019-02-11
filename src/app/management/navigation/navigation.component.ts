@@ -12,18 +12,9 @@ import {AppState, selectAuthState} from '../../store/app.states';
 export class NavigationComponent implements OnInit {
 
   @Input() user: User;
-  getState: Observable<any>;
 
-  constructor(
-    private store: Store<AppState>
-  ) {
-    this.getState = this.store.select(selectAuthState);
-  }
+  constructor() {}
 
-  ngOnInit() {
-    this.getState.subscribe((state) => {
-      this.user = state.user;
-    });
-  }
+  ngOnInit() {}
 
 }
