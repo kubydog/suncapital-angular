@@ -13,33 +13,39 @@
     </div>
   </form>
 </div>
-<table class="table">
-  <thead>
+<div class="clientTable">
+  <a class="btn btn-outline-primary" routerLink="/app/clients/add">Add Client</a>
+  <table class="table">
+    <thead class="thead-light">
     <tr>
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>
       <th scope="col">Chinese Name</th>
       <th scope="col">Identity</th>
+      <th scope="col">Expire</th>
       <th scope="col">Mobile</th>
       <th scope="col">Address</th>
       <th scope="col">Birth</th>
       <th scope="col">Options</th>
     </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let client of clients">
-    <td>{{client.firstName}}</td>
-    <td>{{client.lastName}}</td>
-    <td>{{client.chineseName}}</td>
-    <td>{{client.identityType}}<span>:</span>{{client.identity}}</td>
-    <td>{{client.mobile}}</td>
-    <td>{{client.address}}</td>
-    <td>{{client.birthDate}}</td>
-    <td>
-      <a alt="delete"><i class="far fa-trash-alt"></i></a>
-      <a alt="receivers"><i class="far fa-address-book"></i></a>
-    </td>
-  </tr>
-  </tbody>
-</table>
-<a class="btn btn-outline-primary" routerLink="/app/clients/add">Add</a>
+    </thead>
+    <tbody>
+    <tr *ngFor="let client of clients">
+      <td>{{client.firstName}}</td>
+      <td>{{client.lastName}}</td>
+      <td>{{client.chineseName}}</td>
+      <td>{{client.identityType}}<span>:</span>{{client.identity}}</td>
+      <td>{{client.identityExpireDate}}</td>
+      <td>{{client.mobile}}</td>
+      <td>{{client.address}} {{client.suburb}} {{client.state}} {{client.postCode}}</td>
+      <td>{{client.birthDate}}</td>
+      <td>
+        <a alt="delete"><i class="far fa-trash-alt"></i></a>
+        <a alt="receivers"><i class="far fa-address-book"></i></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+

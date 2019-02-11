@@ -16,6 +16,7 @@ import { AuthEffects } from './store/user/user.effect';
 import {StoreModule} from '@ngrx/store';
 import {reducers} from './store/app.states';
 import {ErrorInterceptor, TokenInterceptor} from './service/token.interceptor';
+import {ClientEffect} from './store/client/client.effect';
 
 
 @NgModule({
@@ -34,7 +35,7 @@ import {ErrorInterceptor, TokenInterceptor} from './service/token.interceptor';
     ManagementModule,
     HttpClientModule,
     StoreModule.forRoot( reducers, {}),
-    EffectsModule.forRoot([AuthEffects])
+    EffectsModule.forRoot([AuthEffects, ClientEffect])
   ],
   providers: [
     {

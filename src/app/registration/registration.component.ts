@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import { passwordInconformityValidator } from '../directive/password-inconformity.directive';
 import {User} from '../model/user';
-import { USERS } from '../mockdata/Users';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {AppState, selectAuthState} from '../store/app.states';
@@ -56,7 +55,7 @@ export class RegistrationComponent implements OnInit {
       isAdmin: this.isAdmin.value
     };
     this.store.dispatch(new SignUp(payload));
-    this.router.navigate(['/login']);
+    // this.router.navigate(['/login']);
   }
 
   get email() {

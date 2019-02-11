@@ -6,6 +6,10 @@ export class Client {
   birthDate?: string;
   mobile?: string;
   address?: string;
+  suburb?: string;
+  state?: string;
+  postCode?: string;
   identityType?: string;
   identity?: string;
+  identityExpireDate?: string;
 }

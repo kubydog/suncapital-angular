@@ -7,5 +7,16 @@ label {
 }
 
 table {
+  margin-top: 10px;
+}
+
+.clientTable {
+  border:1px solid gray;
+  border-radius: 4px;
   margin-top: 50px;
+}
+
+.clientTable a {
+  margin: 10px;
+  float: right;
 }

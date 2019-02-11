@@ -1,3 +1,132 @@
-<p>
-  client-add works!
-</p>
+<div class="add">
+  <h3 class="h3">Add New Client</h3>
+  <form class="addForm" [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="firstName">First Name:</label>
+      <div class="col-sm-3">
+        <input type="text" id="firstName" formControlName="firstName" class="form-control" autofocus>
+      </div>
+      <div *ngIf="submitted && firstName.invalid" class="alert alert-danger">
+        <div *ngIf="firstName.errors.required">
+          First Name is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="lastName">Last Name:</label>
+      <div class="col-sm-3">
+        <input type="text" id="lastName" formControlName="lastName" class="form-control">
+      </div>
+      <div *ngIf="submitted && lastName.invalid" class="alert alert-danger">
+        <div *ngIf="lastName.errors.required">
+          Last Name is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="chineseName">Chinese Name:</label>
+      <div class="col-sm-3">
+        <input type="text" id="chineseName" formControlName="chineseName" class="form-control">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="birth">Birth:</label>
+      <div class="col-sm-3">
+        <input type="date" id="birth" formControlName="birthDate" class="form-control">
+      </div>
+      <div *ngIf="submitted && birthDate.invalid" class="alert alert-danger">
+        <div *ngIf="birthDate.errors.required">
+          Birth Date is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="mobile">Mobile:</label>
+      <div class="col-sm-3">
+        <input type="text" id="mobile" formControlName="mobile" class="form-control">
+      </div>
+      <div *ngIf="submitted && mobile.invalid" class="alert alert-danger">
+        <div *ngIf="mobile.errors.required">
+          Mobile is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="address">Address:</label>
+      <div class="col-sm-3">
+        <input type="text" id="address" formControlName="address" class="form-control">
+      </div>
+      <div *ngIf="submitted && address.invalid" class="alert alert-danger">
+        <div *ngIf="address.errors.required">
+          Address is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="suburb">Suburb:</label>
+      <div class="col-sm-3">
+        <input type="text" id="suburb" formControlName="suburb" class="form-control">
+      </div>
+      <div *ngIf="submitted && suburb.invalid" class="alert alert-danger">
+        <div *ngIf="suburb.errors.required">
+          Suburb is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="state">State:</label>
+      <div class="col-sm-3">
+        <input type="text" id="state" formControlName="state" class="form-control">
+      </div>
+      <div *ngIf="submitted && state.invalid" class="alert alert-danger">
+        <div *ngIf="state.errors.required">
+          State is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="postCode">Post Code:</label>
+      <div class="col-sm-3">
+        <input type="text" id="postCode" formControlName="postCode" class="form-control">
+      </div>
+      <div *ngIf="submitted && postCode.invalid" class="alert alert-danger">
+        <div *ngIf="postCode.errors.required">
+          Post Code is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="identityType">Identity Type:</label>
+      <div class="col-sm-3">
+        <select type="s" id="identityType" formControlName="identityType" class="form-control">
+          <option value="Driver Licence">Driver Licence</option>
+          <option value="Photo Card">Photo Card</option>
+          <option value="Passport">Passport</option>
+        </select>
+      </div>
+      <div *ngIf="submitted && identityType.invalid" class="alert alert-danger">
+        <div *ngIf="identityType.errors.required">
+          Identity Type is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="identity">Identity:</label>
+      <div class="col-sm-3">
+        <input type="text" id="identity" formControlName="identity" class="form-control">
+      </div>
+      <div *ngIf="submitted && identity.invalid" class="alert alert-danger">
+        <div *ngIf="identity.errors.required">
+          Identity is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="identityExpireDate">Expire Date:</label>
+      <div class="col-sm-3">
+        <input type="date" id="identityExpireDate" formControlName="identityExpireDate" class="form-control">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-lg btn-block btn-primary col-sm-2"> Add </button>
+  </form>
+</div>

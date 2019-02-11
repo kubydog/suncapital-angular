@@ -77,7 +77,10 @@ export class AuthEffects {
 
   @Effect({dispatch: false})
   SignUpSuccess: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.SIGNUP_SUCCESS)
+    ofType(AuthActionTypes.SIGNUP_SUCCESS),
+    tap(() => {
+      this.router.navigateByUrl('/login');
+    })
   );
 
   @Effect({dispatch: false})
