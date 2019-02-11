@@ -5,6 +5,7 @@ import { ManagementComponent } from './management/management.component';
 import { ClientsComponent } from './clients/clients.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import {ClientAddComponent} from './client-add/client-add.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: 'statistics',
         component: StatisticsComponent
+      },
+      {
+        path: 'clients/add',
+        component: ClientAddComponent
       }
     ]
   }

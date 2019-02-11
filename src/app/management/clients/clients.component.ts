@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {Client} from '../../model/client';
 
 @Component({
   selector: 'app-clients',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientsComponent implements OnInit {
 
+  firstName = new FormControl('');
+  lastName = new FormControl('');
+
+  clients: Client[];
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  onSubmit() {
+
+  }
 }

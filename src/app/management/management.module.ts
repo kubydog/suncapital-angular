@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { ManagementRoutingModule } from './management-routing.module';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -9,11 +11,14 @@ import { ManagementComponent } from './management/management.component';
 import { ClientsComponent } from './clients/clients.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { ClientAddComponent } from './client-add/client-add.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    ManagementRoutingModule
+    ManagementRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   declarations: [
     NavigationComponent,
@@ -22,7 +27,8 @@ import { StatisticsComponent } from './statistics/statistics.component';
     ManagementComponent,
     ClientsComponent,
     TransactionsComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    ClientAddComponent
   ]
 })
 export class ManagementModule { }

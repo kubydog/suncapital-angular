@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {AuthService} from '../service/auth.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {AppState, selectAuthState} from '../store/app.states';
