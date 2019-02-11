@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../../model/user';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
@@ -11,7 +11,7 @@ import {AppState, selectAuthState} from '../../store/app.states';
 })
 export class NavigationComponent implements OnInit {
 
-  user: User;
+  @Input() user: User;
   getState: Observable<any>;
 
   constructor(

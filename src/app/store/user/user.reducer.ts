@@ -52,6 +52,26 @@ export function reducer(state = initialState, action: All): State {
         errorMessage: 'That email is already in use.'
       };
     }
+    case AuthActionTypes.GETUSER_TOKEN_SUCCESS: {
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: {
+          token: action.payload.token,
+          email: action.payload.email,
+          firstName: action.payload.firstName,
+          lastName: action.payload.lastName,
+          isAdmin: action.payload.isAdmin
+        },
+        errorMessage: null
+      };
+    }
+    case AuthActionTypes.GETUSER_TOKEN_FAILURE: {
+      return {
+        ...state,
+        errorMessage: 'Failed to get user by token'
+      };
+    }
     default: {
       return state;
     }

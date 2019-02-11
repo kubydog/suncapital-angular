@@ -25,4 +25,9 @@ export class AuthService {
     const url = `${this.BASE_URL}/user/register`;
     return this.http.post<User>(url, user);
   }
+
+  getUserByToken(): Observable<any> {
+    const url = `${this.BASE_URL}/user/getUserByToken`;
+    return this.http.get<User>(url);
+  }
 }

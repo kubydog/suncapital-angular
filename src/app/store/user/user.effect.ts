@@ -5,7 +5,17 @@ import { Observable, of} from 'rxjs';
 import { map, switchMap, tap, catchError } from 'rxjs/operators';
 
 import { AuthService } from '../../service/auth.service';
-import {AuthActionTypes, SignFailure, SignIn, SignSuccess, SignUp, SignUpFailure, SignUpSuccess} from './user.actions';
+import {
+  AuthActionTypes,
+  GetUserByToken, GetUserByTokenFailure,
+  GetUserByTokenSuccess,
+  SignFailure,
+  SignIn,
+  SignSuccess,
+  SignUp,
+  SignUpFailure,
+  SignUpSuccess
+} from './user.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -73,6 +83,36 @@ export class AuthEffects {
   @Effect({dispatch: false})
   SignUpFailure: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.SIGNUP_FAILURE)
+  );
+
+  @Effect()
+  GetUserByToken: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.GETUSER_TOKEN),
+    switchMap((action: GetUserByToken) => {
+      return this.authService.getUserByToken().pipe(
+        map((user) => {
+          console.log('Success: Get user ' + user);
+          return new GetUserByTokenSuccess(user);
+        }),
+        catchError((error) => {
+          console.log('Fail: Get User' + error);
+          return of(new GetUserByTokenFailure({error: error}));
+        })
+      );
+    })
+  );
+
+  @Effect({dispatch: false})
+  GetUserByTokenSuccess: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.GETUSER_TOKEN_SUCCESS)
+  );
+
+  @Effect({dispatch: false})
+  GetUserByTokenFailure: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.GETUSER_TOKEN_FAILURE),
+    tap(() => {
+      this.router.navigateByUrl('/login');
+    })
   );
 }
 

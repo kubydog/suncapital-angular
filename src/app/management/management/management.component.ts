@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {User} from '../../model/user';
+import {Observable} from 'rxjs';
+import {Store} from '@ngrx/store';
+import {AppState, selectAuthState} from '../../store/app.states';
+import {GetUserByToken} from '../../store/user/user.actions';
 
 @Component({
   selector: 'app-management',
@@ -7,9 +12,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManagementComponent implements OnInit {
 
-  constructor() { }
+  user: User;
+  getState: Observable<any>;
+
+  constructor(private store: Store<AppState>) {
+    this.getState = this.store.select(selectAuthState);
+  }
 
   ngOnInit() {
+    this.store.dispatch(new GetUserByToken());
+    this.getState.subscribe((state) => {
+      this.user = state.user;
+    });
   }
 
 }
