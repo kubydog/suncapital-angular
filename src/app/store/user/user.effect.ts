@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Action } from '@ngrx/store';
 import { Router} from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of} from 'rxjs';
@@ -24,7 +23,7 @@ export class AuthEffects {
       return this.authService.signIn(payload.email, payload.password).pipe(
         map((user) => {
           console.log(user);
-          return new SignSuccess({token: user.token, email: payload.email});
+          return new SignSuccess(user);
         }),
         catchError((error) => {
           console.log(error);
@@ -39,7 +38,7 @@ export class AuthEffects {
     ofType(AuthActionTypes.SIGNIN_SUCCESS),
     tap((user) => {
       localStorage.setItem('token', user.payload.token);
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/app/dashboard');
     })
   );
 

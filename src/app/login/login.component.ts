@@ -3,8 +3,9 @@ import { FormControl } from '@angular/forms';
 import {AuthService} from '../service/auth.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AppState } from '../store/app.states';
+import {AppState, selectAuthState} from '../store/app.states';
 import {SignIn} from '../store/user/user.actions';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -16,11 +17,19 @@ export class LoginComponent implements OnInit {
   email = new FormControl('');
   password = new FormControl('');
 
+  getState: Observable<any>;
+  errorMessage: string | null;
+
   constructor(
     private store: Store<AppState>,
-    private router: Router) { }
+    private router: Router) {
+    this.getState = this.store.select(selectAuthState);
+  }
 
   ngOnInit() {
+    this.getState.subscribe((state) => {
+      this.errorMessage = state.errorMessage;
+    });
   }
 
   onSubmit() {
@@ -28,10 +37,7 @@ export class LoginComponent implements OnInit {
       email: this.email.value,
       password: this.password.value
     }
-    console.log({email: this.email.value, password: this.password.value});
-    this.store.dispatch(new SignIn(payload))
-    this.router.navigate(['/app/dashboard'])
-    return true;
+    this.store.dispatch(new SignIn(payload));
   }
 
 }

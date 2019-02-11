@@ -5,8 +5,9 @@ import {User} from '../model/user';
 import { USERS } from '../mockdata/Users';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
-import {AppState} from '../store/app.states';
+import {AppState, selectAuthState} from '../store/app.states';
 import {SignUp} from '../store/user/user.actions';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-registration',
@@ -19,7 +20,8 @@ export class RegistrationComponent implements OnInit {
 
   submitted = false;
 
-  users: User[] = USERS;
+  getState: Observable<any>;
+  errorMessage: string | null;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -32,9 +34,14 @@ export class RegistrationComponent implements OnInit {
       passwordVerify: ['', [Validators.required, Validators.minLength(6)]],
       isAdmin: [false]
     }, {validator: passwordInconformityValidator });
+    this.getState = this.store.select(selectAuthState);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getState.subscribe((state) => {
+      this.errorMessage = state.errorMessage;
+    });
+  }
 
   onSubmit() {
     this.submitted = true;

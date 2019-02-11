@@ -1,6 +1,5 @@
 import {User} from '../../model/user';
 import {All, AuthActionTypes} from './user.actions';
-import {st} from '@angular/core/src/render3';
 
 export interface State {
   isAuthenticated: boolean;
@@ -22,7 +21,10 @@ export function reducer(state = initialState, action: All): State {
         isAuthenticated: true,
         user: {
           token: action.payload.token,
-          email: action.payload.email
+          email: action.payload.email,
+          firstName: action.payload.firstName,
+          lastName: action.payload.lastName,
+          isAdmin: action.payload.isAdmin
         },
         errorMessage: null
       };
