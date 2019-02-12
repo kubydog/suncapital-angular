@@ -28,6 +28,19 @@ export function reducer(state = initialState, action: All): State {
         errorMessage: 'Failed to add client'
       };
     }
+    case ClientActionTypes.GETCLIENT_ID_SUCCESS: {
+      return {
+        ...state,
+        currentClient: action.payload,
+        errorMessage: null
+      };
+    }
+    case ClientActionTypes.GETCLIENT_ID_FAILURE: {
+      return {
+        ...state,
+        errorMessage: 'Failed to get client'
+      };
+    }
     default: {
       return state;
     }

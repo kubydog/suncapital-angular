@@ -12,6 +12,7 @@ import { ClientsComponent } from './clients/clients.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { ClientAddComponent } from './client-add/client-add.component';
+import { ClientDetailComponent } from './client-detail/client-detail.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { ClientAddComponent } from './client-add/client-add.component';
     ClientsComponent,
     TransactionsComponent,
     StatisticsComponent,
-    ClientAddComponent
+    ClientAddComponent,
+    ClientDetailComponent
   ]
 })
 export class ManagementModule { }

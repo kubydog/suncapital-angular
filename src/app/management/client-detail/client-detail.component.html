@@ -1,0 +1,61 @@
+<div class="details">
+  <h3 class="h3 text-center">Client Detail</h3>
+  <div *ngIf="client">
+    <div class="client">
+      <div class="row">
+        <div class="col">
+          <span>First Name: {{client.firstName}}</span>
+        </div>
+        <div class="col">
+          <span>Last Name: {{client.lastName}}</span>
+        </div>
+        <div class="col">
+          <span>Chinese Name: {{client.chineseName}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <span>Birth Date: {{client.birthDate | date: 'dd/MM/yyyy'}}</span>
+        </div>
+        <div class="col">
+          <span>Mobile: {{client.mobile}}</span>
+        </div>
+        <div class="col">
+          <span>Address: {{client.address}} {{client.suburb}} {{client.state}} {{client.postCode}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <span>Identity Type: {{client.identityType}}</span>
+        </div>
+        <div class="col">
+          <span>Identity: {{client.identity}}</span>
+        </div>
+        <div class="col">
+          <span>Expire Date: {{client.identityExpireDate | date: 'dd/MM/yyyy'}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <span>Identity Image:</span>
+          <img src="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="accounts">
+  <h5 class="h5">Bank Account</h5>
+  <div class="accountTable">
+    <button class="btn btn-light bg-block">Add Account</button>
+    <table class="table">
+      <thead class="thead-light">
+        <th scope="col">Account Name</th>
+        <th scope="col">Account Number</th>
+        <th scope="col">Bank</th>
+        <th scope="col">Address</th>
+        <th scope="col">Options</th>
+      </thead>
+    </table>
+  </div>
+</div>

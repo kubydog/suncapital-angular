@@ -6,6 +6,7 @@ import { ClientsComponent } from './clients/clients.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import {ClientAddComponent} from './client-add/client-add.component';
+import {ClientDetailComponent} from './client-detail/client-detail.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: 'clients/add',
         component: ClientAddComponent
+      },
+      {
+        path: 'client/:id',
+        component: ClientDetailComponent
       }
     ]
   }

@@ -1,0 +1,19 @@
+.details {
+  margin-top: 20px;
+}
+
+.client {
+  border-bottom: 1px solid gray;
+}
+
+.client .row {
+  margin: 50px 0;
+}
+
+.accounts {
+  margin-top: 20px;
+}
+
+.accountTable .table {
+  margin-top: 20px;
+}

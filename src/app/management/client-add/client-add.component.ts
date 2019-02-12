@@ -32,7 +32,8 @@ export class ClientAddComponent implements OnInit {
       postCode: ['', Validators.required],
       identityType: ['Driver Licence', Validators.required],
       identity: ['', Validators.required],
-      identityExpireDate: ['']
+      identityExpireDate: [''],
+      identityImage: ['']
     });
     this.getState = this.store.select(selectClientState);
   }
@@ -111,5 +112,9 @@ export class ClientAddComponent implements OnInit {
 
   get identityExpireDate() {
     return this.clientForm.get('identityExpireDate');
+  }
+
+  get identityImage() {
+    return this.clientForm.get('identityImage');
   }
 }

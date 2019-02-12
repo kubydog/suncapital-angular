@@ -14,4 +14,9 @@ export class ClientService {
     const url = `${this.BASE_URL}/add`;
     return this.http.post(url, client);
   }
+
+  getClientById(id: string) {
+    const url = `${this.BASE_URL}/${id}`;
+    return this.http.get(url);
+  }
 }
