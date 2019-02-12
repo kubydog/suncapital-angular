@@ -41,6 +41,19 @@ export function reducer(state = initialState, action: All): State {
         errorMessage: 'Failed to get client'
       };
     }
+    case ClientActionTypes.GETCLIENTS_SUCCESS: {
+      return {
+        ...state,
+        clients: action.payload,
+        errorMessage: null
+      };
+    }
+    case ClientActionTypes.GEtCLIENTS_FAILURE: {
+      return {
+        ...state,
+        errorMessage: 'Failed to get clients'
+      };
+    }
     default: {
       return state;
     }

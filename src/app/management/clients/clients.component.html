@@ -35,13 +35,13 @@
       <td>{{client.lastName}}</td>
       <td>{{client.chineseName}}</td>
       <td>{{client.identityType}}<span>:</span>{{client.identity}}</td>
-      <td>{{client.identityExpireDate}}</td>
+      <td>{{client.identityExpireDate | date: 'dd/MM/yyyy'}}</td>
       <td>{{client.mobile}}</td>
       <td>{{client.address}} {{client.suburb}} {{client.state}} {{client.postCode}}</td>
-      <td>{{client.birthDate}}</td>
-      <td>
-        <a alt="delete"><i class="far fa-trash-alt"></i></a>
-        <a alt="receivers"><i class="far fa-address-book"></i></a>
+      <td>{{client.birthDate | date: 'dd/MM/yyyy'}}</td>
+      <td class="row">
+        <a alt="delete" class="col"><i class="far fa-trash-alt text-center"></i></a>
+        <a alt="receivers" class="col"><i class="far fa-address-book"></i></a>
       </td>
     </tr>
     </tbody>

@@ -3,7 +3,16 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import {ClientService} from '../../service/client.service';
 import {Router} from '@angular/router';
 import {Observable, of} from 'rxjs';
-import {Add, AddFailure, AddSuccess, ClientActionTypes, GetClientById, GetClientByIdFailure, GetClientByIdSuccess} from './client.actions';
+import {
+  Add,
+  AddFailure,
+  AddSuccess,
+  ClientActionTypes,
+  GetClientById,
+  GetClientByIdFailure,
+  GetClientByIdSuccess,
+  GetClients, GetClientsFailure, GetClientsSuccess
+} from './client.actions';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 
 @Injectable()
@@ -76,5 +85,33 @@ export class ClientEffect {
     tap( payload => {
       this.router.navigateByUrl('/app/clients');
     })
+  );
+
+  @Effect()
+  GetClients: Observable<any> = this.actions.pipe(
+    ofType(ClientActionTypes.GETCLIENTS),
+    map((action: GetClients) => action.payload),
+    switchMap( payload => {
+      return this.clientService.getClients(payload.firstName, payload.lastName).pipe(
+        map( clients => {
+          console.log('Get Clients Success: ' + clients);
+          return new GetClientsSuccess(clients);
+        }),
+        catchError( error => {
+          console.log('Get Clients Failure: ' + error);
+          return of(new GetClientsFailure({ error: error}));
+        })
+      );
+    })
+  );
+
+  @Effect({dispatch: false})
+  GetClientsSuccess: Observable<any> = this.actions.pipe(
+    ofType(ClientActionTypes.GETCLIENTS_SUCCESS)
+  );
+
+  @Effect({dispatch: false})
+  GetClientsFailure: Observable<any> = this.actions.pipe(
+    ofType(ClientActionTypes.GEtCLIENTS_FAILURE)
   );
 }

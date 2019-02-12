@@ -19,4 +19,21 @@ export class ClientService {
     const url = `${this.BASE_URL}/${id}`;
     return this.http.get(url);
   }
+
+  getClients(firstName: string, lastName: string) {
+    let query = '?';
+    if (firstName && firstName !== '') {
+      query = query + 'firstName=' + firstName;
+    }
+    if (lastName && lastName !== '') {
+      if (query === '?') {
+        query = query + 'lastName=' + lastName;
+      }
+      else {
+        query = query + '&lastName=' + lastName;
+      }
+    }
+    const url = `${this.BASE_URL}/clients/${query}`;
+    return this.http.get(url);
+  }
 }

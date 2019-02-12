@@ -16,7 +16,11 @@ table {
   margin-top: 50px;
 }
 
-.clientTable a {
+.clientTable .btn {
   margin: 10px;
   float: right;
+}
+
+.table td {
+  font-size: 0.8rem !important;
 }

@@ -6,7 +6,10 @@ export enum ClientActionTypes {
   ADD_FAILURE = '[Client] Add Failure',
   GETCLIENT_ID = '[Client] Get Client By ID',
   GETCLIENT_ID_SUCCESS = '[Client] Get Client By ID SUCCESS',
-  GETCLIENT_ID_FAILURE = '[Client] Get Client By ID FAILURE'
+  GETCLIENT_ID_FAILURE = '[Client] Get Client By ID FAILURE',
+  GETCLIENTS = '[Client] Get Clients',
+  GETCLIENTS_SUCCESS = '[Client] Get Clients Success',
+  GEtCLIENTS_FAILURE = '[Client] Get Clients Failure',
 }
 
 export class Add implements Action {
@@ -39,5 +42,21 @@ export class GetClientByIdFailure implements Action {
   constructor(public payload: any) {}
 }
 
+export class GetClients implements Action {
+  readonly type = ClientActionTypes.GETCLIENTS;
+  constructor(public payload: any) {}
+}
+
+export class GetClientsSuccess implements Action {
+  readonly type = ClientActionTypes.GETCLIENTS_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class GetClientsFailure implements Action {
+  readonly type = ClientActionTypes.GEtCLIENTS_FAILURE;
+  constructor(public payload: any) {}
+}
+
 export type All = | Add | AddSuccess | AddFailure
-  | GetClientById | GetClientByIdSuccess | GetClientByIdFailure;
+  | GetClientById | GetClientByIdSuccess | GetClientByIdFailure
+  | GetClients | GetClientsSuccess | GetClientsFailure;
