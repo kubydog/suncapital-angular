@@ -23,8 +23,10 @@ export class ClientDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    const id = this.route.params._value.id;
-    this.store.dispatch(new GetClientById(id));
+    this.route.params.subscribe(params => {
+      const id = params.id;
+      this.store.dispatch(new GetClientById(id));
+    });
     this.getState.subscribe(state => {
       this.client = state.currentClient;
       this.errorMessage = state.errorMessage;
