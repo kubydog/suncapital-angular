@@ -7,6 +7,7 @@ import { TransactionsComponent } from './transactions/transactions.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import {ClientAddComponent} from './client-add/client-add.component';
 import {ClientDetailComponent} from './client-detail/client-detail.component';
+import {ClientEditComponent} from './client-edit/client-edit.component';
 
 const routes: Routes = [
   {
@@ -30,12 +31,16 @@ const routes: Routes = [
         component: StatisticsComponent
       },
       {
-        path: 'clients/add',
+        path: 'client/add',
         component: ClientAddComponent
       },
       {
         path: 'client/:id',
         component: ClientDetailComponent
+      },
+      {
+        path: 'client/edit/:id',
+        component: ClientEditComponent
       }
     ]
   }

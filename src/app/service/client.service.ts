@@ -36,4 +36,9 @@ export class ClientService {
     const url = `${this.BASE_URL}/clients/${query}`;
     return this.http.get(url);
   }
+
+  edit(client: Client) {
+    const url = `${this.BASE_URL}/edit/${client._id}`;
+    return this.http.put(url, client);
+  }
 }

@@ -10,6 +10,9 @@ export enum ClientActionTypes {
   GETCLIENTS = '[Client] Get Clients',
   GETCLIENTS_SUCCESS = '[Client] Get Clients Success',
   GEtCLIENTS_FAILURE = '[Client] Get Clients Failure',
+  EDIT = '[Client] Edit',
+  EDIT_SUCCESS = '[Client] Edit Success',
+  EDIT_FAILURE = '[Client] Edit Failure',
 }
 
 export class Add implements Action {
@@ -57,6 +60,22 @@ export class GetClientsFailure implements Action {
   constructor(public payload: any) {}
 }
 
+export class Edit implements Action {
+  readonly type = ClientActionTypes.EDIT;
+  constructor(public payload: any) {}
+}
+
+export class EditSuccess implements Action {
+  readonly type = ClientActionTypes.EDIT_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class EditFailure implements Action {
+  readonly type = ClientActionTypes.EDIT_FAILURE;
+  constructor(public payload: any) {}
+}
+
 export type All = | Add | AddSuccess | AddFailure
   | GetClientById | GetClientByIdSuccess | GetClientByIdFailure
-  | GetClients | GetClientsSuccess | GetClientsFailure;
+  | GetClients | GetClientsSuccess | GetClientsFailure
+  | Edit | EditSuccess | EditFailure;

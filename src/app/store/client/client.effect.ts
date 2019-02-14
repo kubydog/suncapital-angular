@@ -7,7 +7,7 @@ import {
   Add,
   AddFailure,
   AddSuccess,
-  ClientActionTypes,
+  ClientActionTypes, Edit, EditFailure, EditSuccess,
   GetClientById,
   GetClientByIdFailure,
   GetClientByIdSuccess,
@@ -113,5 +113,37 @@ export class ClientEffect {
   @Effect({dispatch: false})
   GetClientsFailure: Observable<any> = this.actions.pipe(
     ofType(ClientActionTypes.GEtCLIENTS_FAILURE)
+  );
+
+  @Effect()
+  Edit: Observable<any> = this.actions.pipe(
+    ofType(ClientActionTypes.EDIT),
+    map((action: Edit) => action.payload),
+    switchMap( payload => {
+      return this.clientService.edit(payload).pipe(
+        map( client => {
+          console.log('Edit Client Success' + client);
+          return new EditSuccess(client);
+        }),
+        catchError( error => {
+          console.log('Edit Client Failure' + error);
+          return of(new EditFailure({error: error}));
+        })
+      );
+    })
+  );
+
+  @Effect({dispatch: false})
+  EditSuccess: Observable<any> = this.actions.pipe(
+    ofType(ClientActionTypes.EDIT_SUCCESS),
+    map((action: AddSuccess) => action.payload),
+    tap(payload => {
+      this.router.navigateByUrl(`/app/client/${payload._id}`);
+    })
+  );
+
+  @Effect({dispatch: false})
+  EditFailure: Observable<any> = this.actions.pipe(
+    ofType(ClientActionTypes.EDIT_FAILURE)
   );
 }

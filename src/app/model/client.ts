@@ -3,7 +3,7 @@ export class Client {
   firstName?: string;
   lastName?: string;
   chineseName?: string;
-  birthDate?: string;
+  birthDate?: Date;
   mobile?: string;
   address?: string;
   suburb?: string;
@@ -11,5 +11,5 @@ export class Client {
   postCode?: string;
   identityType?: string;
   identity?: string;
-  identityExpireDate?: string;
+  identityExpireDate?: Date;
 }

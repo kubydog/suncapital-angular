@@ -16,11 +16,16 @@ table {
   margin-top: 50px;
 }
 
-.clientTable .btn {
+.clientTable .btn-outline-primary {
   margin: 10px;
   float: right;
 }
 
 .table td {
   font-size: 0.8rem !important;
+}
+
+
+tr .row button {
+  margin-top: -10px;
 }

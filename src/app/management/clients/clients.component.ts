@@ -5,6 +5,7 @@ import {Store} from '@ngrx/store';
 import {AppState, selectClientState} from '../../store/app.states';
 import {GetClients} from '../../store/client/client.actions';
 import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-clients',
@@ -19,7 +20,8 @@ export class ClientsComponent implements OnInit {
   getState: Observable<any>;
   errorMessage: string | null;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>,
+              private router: Router) {
     this.getState = this.store.select(selectClientState);
   }
 
@@ -37,4 +39,14 @@ export class ClientsComponent implements OnInit {
     };
     this.store.dispatch(new GetClients(payload));
   }
+
+  onDelete(id) {
+
+  }
+
+  onEdit(id) {
+    this.router.navigateByUrl(`/app/client/edit/${id}`);
+  }
 }
+
+

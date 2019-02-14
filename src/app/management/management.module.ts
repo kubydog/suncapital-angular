@@ -13,6 +13,7 @@ import { TransactionsComponent } from './transactions/transactions.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { ClientAddComponent } from './client-add/client-add.component';
 import { ClientDetailComponent } from './client-detail/client-detail.component';
+import { ClientEditComponent } from './client-edit/client-edit.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { ClientDetailComponent } from './client-detail/client-detail.component';
     TransactionsComponent,
     StatisticsComponent,
     ClientAddComponent,
-    ClientDetailComponent
+    ClientDetailComponent,
+    ClientEditComponent
   ]
 })
 export class ManagementModule { }
