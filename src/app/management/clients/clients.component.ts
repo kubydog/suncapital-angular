@@ -3,7 +3,7 @@ import {FormControl} from '@angular/forms';
 import {Client} from '../../model/client';
 import {Store} from '@ngrx/store';
 import {AppState, selectClientState} from '../../store/app.states';
-import {GetClients} from '../../store/client/client.actions';
+import {Delete, GetClients} from '../../store/client/client.actions';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 
@@ -41,7 +41,11 @@ export class ClientsComponent implements OnInit {
   }
 
   onDelete(id) {
-
+    const payload = {
+      id: id
+    };
+    this.store.dispatch(new Delete(payload));
+    location.reload();
   }
 
   onEdit(id) {

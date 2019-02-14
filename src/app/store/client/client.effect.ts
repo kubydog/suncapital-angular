@@ -7,7 +7,7 @@ import {
   Add,
   AddFailure,
   AddSuccess,
-  ClientActionTypes, Edit, EditFailure, EditSuccess,
+  ClientActionTypes, Delete, DeleteFailure, DeleteSuccess, Edit, EditFailure, EditSuccess,
   GetClientById,
   GetClientByIdFailure,
   GetClientByIdSuccess,
@@ -145,5 +145,37 @@ export class ClientEffect {
   @Effect({dispatch: false})
   EditFailure: Observable<any> = this.actions.pipe(
     ofType(ClientActionTypes.EDIT_FAILURE)
+  );
+
+  @Effect()
+  Delete: Observable<any> = this.actions.pipe(
+    ofType(ClientActionTypes.DELETE),
+    map( (action: Delete) => action.payload),
+    switchMap( payload => {
+      return this.clientService.delete(payload.id).pipe(
+        map(id  => {
+          console.log('Delete Client Success ' + id);
+          return new DeleteSuccess(id);
+        }),
+        catchError( error => {
+          console.log('Delete Client Failure ' + error);
+          return of(new DeleteFailure({error: error}));
+        })
+      );
+    })
+  );
+
+  @Effect({dispatch: false})
+  DeleteSuccess: Observable<any> = this.actions.pipe(
+    ofType(ClientActionTypes.DELETE_SUCCESS),
+    map( (action: DeleteSuccess) => action.payload),
+    tap(() => {
+      this.router.navigateByUrl('/app/clients');
+    })
+  );
+
+  @Effect()
+  DeleteFailure: Observable<any> = this.actions.pipe(
+    ofType(ClientActionTypes.DELETE_FAILURE)
   );
 }

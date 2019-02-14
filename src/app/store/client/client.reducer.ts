@@ -67,6 +67,15 @@ export function reducer(state = initialState, action: All): State {
         errorMessage: 'Failed to update client'
       };
     }
+    case ClientActionTypes.DELETE_SUCCESS: {
+      return state;
+    }
+    case ClientActionTypes.DELETE_FAILURE: {
+      return {
+        ...state,
+        errorMessage: 'Failed to delete client'
+      };
+    }
     default: {
       return state;
     }

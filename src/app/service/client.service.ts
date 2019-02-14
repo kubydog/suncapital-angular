@@ -41,4 +41,9 @@ export class ClientService {
     const url = `${this.BASE_URL}/edit/${client._id}`;
     return this.http.put(url, client);
   }
+
+  delete(id: string) {
+    const url = `${this.BASE_URL}/${id}`;
+    return this.http.delete(url);
+  }
 }
