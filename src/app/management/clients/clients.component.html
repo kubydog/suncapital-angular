@@ -30,7 +30,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let client of clients">
+    <tr *ngFor="let client of clients" (click)="onDetail(client._id)">
       <td>{{client.firstName}}</td>
       <td>{{client.lastName}}</td>
       <td>{{client.chineseName}}</td>

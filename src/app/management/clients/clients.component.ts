@@ -51,6 +51,10 @@ export class ClientsComponent implements OnInit {
   onEdit(id) {
     this.router.navigateByUrl(`/app/client/edit/${id}`);
   }
+
+  onDetail(id) {
+    this.router.navigateByUrl(`/app/client/${id}`);
+  }
 }
 
 
