@@ -1,3 +1,5 @@
+import {Account} from './account';
+
 export class Client {
   _id?: string;
   firstName?: string;
@@ -12,4 +14,5 @@ export class Client {
   identityType?: string;
   identity?: string;
   identityExpireDate?: Date;
+  accounts?: Account[];
 }

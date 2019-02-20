@@ -14,6 +14,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { ClientAddComponent } from './client-add/client-add.component';
 import { ClientDetailComponent } from './client-detail/client-detail.component';
 import { ClientEditComponent } from './client-edit/client-edit.component';
+import { AccountWindowComponent } from './account-window/account-window.component';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { ClientEditComponent } from './client-edit/client-edit.component';
     StatisticsComponent,
     ClientAddComponent,
     ClientDetailComponent,
-    ClientEditComponent
+    ClientEditComponent,
+    AccountWindowComponent
   ]
 })
 export class ManagementModule { }

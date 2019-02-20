@@ -17,6 +17,8 @@ import {StoreModule} from '@ngrx/store';
 import {reducers} from './store/app.states';
 import {ErrorInterceptor, TokenInterceptor} from './service/token.interceptor';
 import {ClientEffect} from './store/client/client.effect';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import {AccountEffect} from './store/account/account.effect';
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import {ClientEffect} from './store/client/client.effect';
     ManagementModule,
     HttpClientModule,
     StoreModule.forRoot( reducers, {}),
-    EffectsModule.forRoot([AuthEffects, ClientEffect])
+    EffectsModule.forRoot([AuthEffects, ClientEffect, AccountEffect]),
+    ModalModule.forRoot()
   ],
   providers: [
     {
