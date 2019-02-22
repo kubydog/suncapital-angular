@@ -7,7 +7,7 @@ import {
   AccountActionTypes,
   Add,
   AddFailure,
-  AddSuccess, Edit, EditFailure, EditSuccess,
+  AddSuccess, Delete, DeleteFailure, DeleteSuccess, Edit, EditFailure, EditSuccess,
   GetByClientId,
   GetByClientIdFailure,
   GetByClientIdSuccess
@@ -111,5 +111,36 @@ export class AccountEffect {
   @Effect({dispatch: false})
   EditFailure: Observable<any> = this.actions.pipe(
     ofType(AccountActionTypes.EDIT_FAILURE)
+  );
+
+  @Effect()
+  Delete: Observable<any> = this.actions.pipe(
+    ofType(AccountActionTypes.DELETE),
+    map( (action: Delete) => action.payload),
+    switchMap( payload => {
+      return this.accountService.deleteAccount(payload.id).pipe(
+        map( id => {
+          console.log('Delete Account Success ' + id);
+          return new DeleteSuccess(id);
+        }),
+        catchError( error => {
+          console.log('Delete Account Failure ' + error);
+          return of(new DeleteFailure({error: error}));
+        })
+      );
+    })
+  );
+
+  @Effect({dispatch: false})
+  DeleteSuccess: Observable<any> = this.actions.pipe(
+    ofType(AccountActionTypes.DELETE_SUCCESS),
+    tap(() => {
+      location.reload();
+    })
+  );
+
+  @Effect({dispatch: false})
+  DeleteFailure: Observable<any> = this.actions.pipe(
+    ofType(AccountActionTypes.DELETE_FAILURE)
   );
 }

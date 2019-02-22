@@ -8,7 +8,7 @@ import {ActivatedRoute} from '@angular/router';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Account} from '../../model/account';
-import {Add, Edit} from '../../store/account/account.actions';
+import {Add, Delete, Edit} from '../../store/account/account.actions';
 
 @Component({
   selector: 'app-client-detail',
@@ -88,7 +88,8 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
   }
 
   onDelete(id: string) {
-
+    const payload = {id: id};
+    this.store.dispatch(new Delete(payload));
   }
 
   onEdit(template: TemplateRef<any>, account: Account) {

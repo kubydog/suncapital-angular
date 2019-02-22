@@ -10,6 +10,9 @@ export enum AccountActionTypes {
   EDIT = '[Account] Edit Account',
   EDIT_SUCCESS = '[Account] Edit Account Success',
   EDIT_FAILURE = '[Account] Edit Account Failure',
+  DELETE = '[Account] Delete Account',
+  DELETE_SUCCESS = '[Account] Delete Account Success',
+  DELETE_FAILURE = '[Account] Delete Account Failure',
 }
 
 export class Add implements Action {
@@ -57,6 +60,22 @@ export class EditFailure implements Action {
   constructor(public payload: any) {}
 }
 
+export class Delete implements Action {
+  readonly type = AccountActionTypes.DELETE;
+  constructor(public payload: any) {}
+}
+
+export class DeleteSuccess implements Action {
+  readonly type = AccountActionTypes.DELETE_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class DeleteFailure implements Action {
+  readonly type = AccountActionTypes.DELETE_FAILURE;
+  constructor(public payload: any) {}
+}
+
 export type All = | Add | AddSuccess | AddFailure
                   | GetByClientId | GetByClientIdSuccess | GetByClientIdFailure
-                  | Edit | EditSuccess | EditFailure;
+                  | Edit | EditSuccess | EditFailure
+                  | Delete | DeleteSuccess | DeleteFailure;

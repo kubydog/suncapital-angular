@@ -54,6 +54,18 @@ export function reducer(state = initialState, action: All) {
         errorMessage: 'Failed to edit account'
       };
     }
+    case AccountActionTypes.DELETE_SUCCESS: {
+      return {
+        ...state,
+        errorMessage: null
+      };
+    }
+    case AccountActionTypes.DELETE_FAILURE: {
+      return {
+        ...state,
+        errorMessage: 'Failed to delete account'
+      };
+    }
     default: {
       return state;
     }

@@ -25,4 +25,9 @@ export class AccountService {
     const url = `${this.BASE_URL}/account/${account._id}`;
     return this.http.put(url, account);
   }
+
+  deleteAccount(id: string) {
+    const url = `${this.BASE_URL}/account/${id}`;
+    return this.http.delete(url);
+  }
 }
