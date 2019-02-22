@@ -30,6 +30,8 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
   selectedAccount: Account;
   modalTitle: string;
   isAdd: boolean;
+  transactionModal: BsModalRef;
+  transactionForm;
 
   constructor(private store: Store<AppState>,
               private route: ActivatedRoute,
@@ -41,6 +43,23 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
       accountNumber: ['', Validators.required],
       bank: ['', Validators.required],
       _id: ['']
+    });
+    this.transactionForm = this.formBuilder.group({
+      lastName: [''],
+      firstName: [''],
+      birthDate: [''],
+      phone: [''],
+      identity: [''],
+      address: [''],
+      receiverBank: [''],
+      receiverName: [''],
+      receiverAccount: [''],
+      receiveAmount: [''],
+      receiveCurrency: [''],
+      rate: [''],
+      payAmount: [''],
+      payCurrency: [''],
+      fee: ['']
     });
   }
 
@@ -92,6 +111,19 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
     this.store.dispatch(new Delete(payload));
   }
 
+  onTransfer(template: TemplateRef<any>, account: Account, client: Client) {
+    this.lastName.setValue(client.lastName);
+    this.firstName.setValue(client.firstName);
+    this.birthDate.setValue(client.birthDate);
+    this.phone.setValue(client.mobile);
+    this.identity.setValue(client.identityType + ': ' + client.identity);
+    this.address.setValue(client.address + ' ' + client.suburb + ' ' + client.state + ' ' + client.postCode);
+    this.receiverBank.setValue(account.bank);
+    this.receiverName.setValue(account.accountName);
+    this.receiverAccount.setValue(account.accountNumber);
+    this.transactionModal = this.modalService.show(template, this.config);
+  }
+
   onEdit(template: TemplateRef<any>, account: Account) {
     this.selectedAccount = account;
     this.modalTitle = 'Edit Account';
@@ -103,7 +135,11 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
       this._id.setValue(this.selectedAccount._id);
     }
     this.modalRef = this.modalService.show(template, this.config);
-    this.selectedAccount = null;
+    // this.selectedAccount = null;
+  }
+
+  onTransactionSubmit() {
+
   }
 
   get accountName() {
@@ -120,6 +156,66 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
 
   get _id() {
     return this.accountForm.get('_id');
+  }
+
+  get lastName() {
+    return this.transactionForm.get('lastName');
+  }
+
+  get firstName() {
+    return this.transactionForm.get('firstName');
+  }
+
+  get birthDate() {
+    return this.transactionForm.get('birthDate');
+  }
+
+  get phone() {
+    return this.transactionForm.get('phone');
+  }
+
+  get identity() {
+    return this.transactionForm.get('identity');
+  }
+
+  get address() {
+    return this.transactionForm.get('address');
+  }
+
+  get receiverBank() {
+    return this.transactionForm.get('receiverBank');
+  }
+
+  get receiverName() {
+    return this.transactionForm.get('receiverName');
+  }
+
+  get receiverAccount() {
+    return this.transactionForm.get('receiverAccount');
+  }
+
+  get receiverAmount() {
+    return this.transactionForm.get('receiverAmount');
+  }
+
+  get receiverCurrency() {
+    return this.transactionForm.get('receiverCurrency');
+  }
+
+  get payAmount() {
+    return this.transactionForm.get('payAmount');
+  }
+
+  get payCurrency() {
+    return this.transactionForm.get('payCurrency');
+  }
+
+  get rate() {
+    return this.transactionForm.get('rate');
+  }
+
+  get fee() {
+    return this.transactionForm.get('fee');
   }
 
   ngOnDestroy(): void {

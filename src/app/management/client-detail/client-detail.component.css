@@ -21,3 +21,11 @@
 .accountTemp {
   margin: 10px;
 }
+
+.row button {
+  width: 0;
+}
+
+.transactionForm {
+  margin: 20px;
+}
