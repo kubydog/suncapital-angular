@@ -41,6 +41,19 @@ export function reducer(state = initialState, action: All) {
         errorMessage: 'Failed to get accounts by client id'
       };
     }
+    case AccountActionTypes.EDIT_SUCCESS: {
+      return {
+        ...state,
+        currentAccount: action.payload,
+        errorMessage: null
+      };
+    }
+    case AccountActionTypes.EDIT_FAILURE: {
+      return {
+        ...state,
+        errorMessage: 'Failed to edit account'
+      };
+    }
     default: {
       return state;
     }

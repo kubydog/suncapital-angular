@@ -62,7 +62,7 @@
             <td>{{account.bank}}</td>
             <td class="row">
               <button alt="delete" class="col btn" (click)="onDelete(account._id)"><i class="far fa-trash-alt text-center"></i></button>
-              <button alt="edit" class="col btn"><i class="far fa-edit" (click)="onEdit(account._id)" ></i></button>
+              <button alt="edit" class="col btn"><i class="far fa-edit" (click)="onEdit(template,account)" ></i></button>
             </td>
           </tr>
       </tbody>
@@ -72,13 +72,14 @@
 
 <ng-template #template>
   <div class="modal-header text-center">
-    <h4 class="modal-title pull-left">Add Account</h4>
+    <h4 class="modal-title pull-left">{{modalTitle}}</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body accountTemp">
     <form (ngSubmit)="onSubmit()" [formGroup]="accountForm" class="accountForm">
+      <input type="hidden" id="_id" formControlName="_id">
       <div class="form-group row">
         <label for="accountName" class="col-sm-4 col-form-label">Account Name:</label>
         <input id="accountName" formControlName="accountName" class="col-sm-8 form-control" type="text">

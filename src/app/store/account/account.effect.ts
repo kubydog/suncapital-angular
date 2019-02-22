@@ -7,7 +7,7 @@ import {
   AccountActionTypes,
   Add,
   AddFailure,
-  AddSuccess,
+  AddSuccess, Edit, EditFailure, EditSuccess,
   GetByClientId,
   GetByClientIdFailure,
   GetByClientIdSuccess
@@ -80,5 +80,36 @@ export class AccountEffect {
   @Effect({dispatch: false})
   GetByClientIdFailure: Observable<any> = this.actions.pipe(
     ofType(AccountActionTypes.GET_CLIENTID_FAILURE)
+  );
+
+  @Effect()
+  Edit: Observable<any> = this.actions.pipe(
+    ofType(AccountActionTypes.EDIT),
+    map( (action: Edit) => action.payload),
+    switchMap( payload => {
+      return this.accountService.editAccount(payload).pipe(
+        map( account => {
+          console.log('Edit Account Success ' + account);
+          return new EditSuccess(account);
+        }),
+        catchError( error => {
+          console.log('Edit Account Failure ' + error);
+          return of(new EditFailure({error: error}));
+        })
+      );
+    })
+  );
+
+  @Effect({dispatch: false})
+  EditSuccess: Observable<any> = this.actions.pipe(
+    ofType(AccountActionTypes.EDIT_SUCCESS),
+    tap(() => {
+      location.reload();
+    })
+  );
+
+  @Effect({dispatch: false})
+  EditFailure: Observable<any> = this.actions.pipe(
+    ofType(AccountActionTypes.EDIT_FAILURE)
   );
 }

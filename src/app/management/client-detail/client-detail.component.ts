@@ -8,7 +8,7 @@ import {ActivatedRoute} from '@angular/router';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Account} from '../../model/account';
-import {Add} from '../../store/account/account.actions';
+import {Add, Edit} from '../../store/account/account.actions';
 
 @Component({
   selector: 'app-client-detail',
@@ -27,6 +27,9 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
   accountForm;
   subject = new Subscription();
   accounts: Account[];
+  selectedAccount: Account;
+  modalTitle: string;
+  isAdd: boolean;
 
   constructor(private store: Store<AppState>,
               private route: ActivatedRoute,
@@ -36,7 +39,8 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
     this.accountForm = this.formBuilder.group({
       accountName: ['', Validators.required],
       accountNumber: ['', Validators.required],
-      bank: ['', Validators.required]
+      bank: ['', Validators.required],
+      _id: ['']
     });
   }
 
@@ -55,25 +59,50 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
   }
 
   openAccount(template: TemplateRef<any>, account: Account) {
+    this.isAdd = true;
+    this.modalTitle = 'Add Account';
     this.modalRef = this.modalService.show(template, this.config);
   }
 
   onSubmit() {
-    const payload: Account = {
-      accountName: this.accountName.value,
-      accountNumber: this.accountNumber.value,
-      bank: this.bank.value,
-      clientId: this.client._id
+    if (this.isAdd) {
+      const payload: Account = {
+        accountName: this.accountName.value,
+        accountNumber: this.accountNumber.value,
+        bank: this.bank.value,
+        clientId: this.client._id
+      }
+      this.store.dispatch(new Add(payload));
     }
-    this.store.dispatch(new Add(payload));
+    else {
+      const payload: Account = {
+        _id: this._id.value,
+        accountName: this.accountName.value,
+        accountNumber: this.accountNumber.value,
+        bank: this.bank.value,
+        clientId: this.client._id
+      };
+      this.store.dispatch(new Edit(payload));
+    }
+
   }
 
   onDelete(id: string) {
 
   }
 
-  onEdit(id: string) {
-
+  onEdit(template: TemplateRef<any>, account: Account) {
+    this.selectedAccount = account;
+    this.modalTitle = 'Edit Account';
+    this.isAdd = false;
+    if (this.selectedAccount) {
+      this.accountName.setValue(this.selectedAccount.accountName);
+      this.accountNumber.setValue(this.selectedAccount.accountNumber);
+      this.bank.setValue(this.selectedAccount.bank);
+      this._id.setValue(this.selectedAccount._id);
+    }
+    this.modalRef = this.modalService.show(template, this.config);
+    this.selectedAccount = null;
   }
 
   get accountName() {
@@ -86,6 +115,10 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
 
   get bank() {
     return this.accountForm.get('bank');
+  }
+
+  get _id() {
+    return this.accountForm.get('_id');
   }
 
   ngOnDestroy(): void {

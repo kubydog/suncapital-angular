@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Account} from '../model/account';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,10 @@ export class AccountService {
   getAccountsByClientId(clientId: string) {
     const url = `${this.BASE_URL}/account/${clientId}`;
     return this.http.get(url);
+  }
+
+  editAccount(account: Account) {
+    const url = `${this.BASE_URL}/account/${account._id}`;
+    return this.http.put(url, account);
   }
 }
