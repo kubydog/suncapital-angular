@@ -17,4 +17,5 @@ export class Transaction {
   fee?: number;
   createDate?: Date;
   no?: string;
+  receiverAddress?: string;
 }

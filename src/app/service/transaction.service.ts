@@ -15,4 +15,9 @@ export class TransactionService {
     const url = `${this.BASE_URL}/add`;
     return this.http.post(url, transaction);
   }
+
+  getById(id: string) {
+    const url = `${this.BASE_URL}/${id}`;
+    return this.http.get(url);
+  }
 }

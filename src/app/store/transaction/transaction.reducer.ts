@@ -1,5 +1,6 @@
 import {Transaction} from '../../model/transaction';
 import {All, TransactionActionTypes} from './transaction.actions';
+import {st} from '@angular/core/src/render3';
 
 export interface State {
   transactions: Transaction[];
@@ -26,6 +27,19 @@ export function reducer(state = initialState, action: All) {
       return {
         ...state,
         errorMessage: 'Failed to add transaction'
+      };
+    }
+    case TransactionActionTypes.GET_BY_ID_SUCCESS: {
+      return {
+        ...state,
+        currentTransaction: action.payload,
+        errorMessage: null
+      };
+    }
+    case TransactionActionTypes.GET_BY_ID_FAILURE: {
+      return {
+        ...state,
+        errorMessage: 'Failed to get transaction'
       };
     }
     default: {

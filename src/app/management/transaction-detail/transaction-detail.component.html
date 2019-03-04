@@ -1,3 +1,41 @@
-<p>
-  transaction-detail works!
-</p>
+<div class="text-center">
+  <h1 class="logo">Suncapital</h1>
+  <span>ACN:143 093 930 ABN:87 143 093 930</span><br>
+  <strong class="date">Date:     </strong><span>{{transaction.createDate | date: 'yyyy/MM/dd'}}</span><br>
+  <span>Shop 2, 17-20 The Esplannade, Ashfield NSW 2131</span><br>
+  <span>Tele:(02) 9798 0058  Fax:(02) 9798 0032</span><br>
+  <span>Email:infosuncapital@gmail.com</span>
+  <h2>汇 款 申 请 书</h2>
+  <span class="no">No. {{transaction.no}}</span><br>
+  <strong>Remittance Application Form</strong>
+</div>
+<div class="remittancer card">
+  <div class="card-header">汇款人 Remittancer Details</div>
+  <div class="card-body">
+    <span>姓LastName:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{transaction.lastName}}</span><br>
+    <span>名FirstName:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{transaction.firstName}}</span><br>
+    <span>出生日期DOB:&nbsp;&nbsp;&nbsp;&nbsp;{{transaction.birthDate | date: 'dd/MM/yyyy'}}</span><br>
+    <span>电话Phone:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{transaction.phone}}</span><br>
+    <span>证件ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{transaction.identity}}</span><br>
+    <span>地址Address:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{transaction.address}}</span>
+  </div>
+</div>
+<div class="payee card">
+  <div class="card-header">收款人 Payee Details</div>
+  <div class="card-body">
+    <span>银行Bank:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{transaction.receiverBank}}</span><br>
+    <span>姓名Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{transaction.receiverName}}</span><br>
+    <span>账号A/C No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{transaction.receiverAccount}}</span><br>
+    <span>地址Address:&nbsp;{{transaction.receiverAddress}}</span><br>
+  </div>
+</div>
+<div class="exchange card">
+  <div class="card-header">汇款明细 Exchange Details</div>
+  <div class="card-body">
+    <span>当地货币金额:&nbsp;&nbsp;&nbsp;{{transaction.receiveAmount}}&nbsp;{{transaction.receiveCurrency}}</span><br>
+    <span>汇率:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{transaction.rate}}</span><br>
+    <span>汇费:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{transaction.fee}}</span><br>
+    <span>外国货币金额:&nbsp;&nbsp;&nbsp;{{transaction.payAmount}}&nbsp;{{transaction.payCurrency}}</span><br><br>
+    <span>汇款人签名 Signature:</span>
+  </div>
+</div>

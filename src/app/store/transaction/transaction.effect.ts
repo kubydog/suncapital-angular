@@ -3,8 +3,16 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import {TransactionService} from '../../service/transaction.service';
 import {Router} from '@angular/router';
 import {Observable, of} from 'rxjs';
-import {AddTransaction, AddTransactionFailure, AddTransactionSuccess, TransactionActionTypes} from './transaction.actions';
+import {
+  AddTransaction,
+  AddTransactionFailure,
+  AddTransactionSuccess,
+  GetById, GetByIdFailure,
+  GetByIdSuccess,
+  TransactionActionTypes
+} from './transaction.actions';
 import {catchError, switchMap, tap, map} from 'rxjs/operators';
+import {trimTrailingNulls} from '@angular/compiler/src/render3/view/util';
 
 @Injectable()
 export class TransactionEffect {
@@ -45,5 +53,31 @@ export class TransactionEffect {
   @Effect({dispatch: false})
   AddTransactionFailure: Observable<any> = this.actions.pipe(
     ofType(TransactionActionTypes.ADD_TRANSACTION_FAILURE)
+  );
+
+  @Effect()
+  GetById: Observable<any> = this.actions.pipe(
+    ofType(TransactionActionTypes.GET_BY_ID),
+    map( (action: GetById) => action.payload),
+    switchMap( payload => {
+      return this.transactionService.getById(payload.id).pipe(
+        map(transaction => {
+          return new GetByIdSuccess(transaction);
+        }),
+        catchError( error => {
+          return of(new GetByIdFailure({error: error}));
+        })
+      );
+    })
+  );
+
+  @Effect({dispatch: false})
+  GetByIdSuccess: Observable<any> = this.actions.pipe(
+    ofType(TransactionActionTypes.GET_BY_ID_SUCCESS)
+  );
+
+  @Effect({dispatch: false})
+  GetByIdFailure: Observable<any> = this.actions.pipe(
+    ofType(TransactionActionTypes.GET_BY_ID_FAILURE)
   );
 }
