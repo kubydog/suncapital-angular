@@ -8,7 +8,7 @@ import {
   AddTransactionFailure,
   AddTransactionSuccess,
   GetById, GetByIdFailure,
-  GetByIdSuccess,
+  GetByIdSuccess, GetTransactions, GetTransactionsFailure, GetTransactionsSuccess,
   TransactionActionTypes
 } from './transaction.actions';
 import {catchError, switchMap, tap, map} from 'rxjs/operators';
@@ -79,5 +79,31 @@ export class TransactionEffect {
   @Effect({dispatch: false})
   GetByIdFailure: Observable<any> = this.actions.pipe(
     ofType(TransactionActionTypes.GET_BY_ID_FAILURE)
+  );
+
+  @Effect()
+  GetTransactions: Observable<any> = this.actions.pipe(
+    ofType(TransactionActionTypes.GET_TRANSACTIONS),
+    map( (action: GetTransactions) => action.payload),
+    switchMap( payload => {
+      return this.transactionService.getTransactions(payload.firstName, payload.lastName).pipe(
+        map( transactions => {
+          return new GetTransactionsSuccess(transactions);
+        }),
+        catchError( error => {
+          return of(new GetTransactionsFailure({error: error}));
+        })
+      );
+    })
+  );
+
+  @Effect({dispatch: false})
+  GetTransactionsSuccess: Observable<any> = this.actions.pipe(
+    ofType(TransactionActionTypes.GET_TRANSACTIONS_SUCCESS)
+  );
+
+  @Effect({dispatch: false})
+  GetTransactionsFailure: Observable<any> = this.actions.pipe(
+    ofType(TransactionActionTypes.GET_TRANSACTIONS_FAILURE)
   );
 }

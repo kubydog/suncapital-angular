@@ -7,6 +7,9 @@ export enum TransactionActionTypes {
   GET_BY_ID = '[Transaction] Get Transaction By Id',
   GET_BY_ID_SUCCESS = '[Transaction] Get Transaction By Id Success',
   GET_BY_ID_FAILURE = '[Transaction] Get Transaction By Id Failure',
+  GET_TRANSACTIONS = '[Transaction] Get Transactions',
+  GET_TRANSACTIONS_SUCCESS = '[Transaction] Get Transactions Success',
+  GET_TRANSACTIONS_FAILURE = '[Transaction] Get Transactions Failure',
 }
 
 export class AddTransaction implements Action {
@@ -39,5 +42,21 @@ export class GetByIdFailure implements Action {
   constructor(public payload: any) {}
 }
 
+export class GetTransactions implements Action {
+  readonly type = TransactionActionTypes.GET_TRANSACTIONS;
+  constructor(public payload: any) {}
+}
+
+export class GetTransactionsSuccess implements Action {
+  readonly type = TransactionActionTypes.GET_TRANSACTIONS_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class GetTransactionsFailure implements Action {
+  readonly type = TransactionActionTypes.GET_TRANSACTIONS_FAILURE;
+  constructor(public payload: any) {}
+}
+
 export type All = |AddTransaction |AddTransactionSuccess |AddTransactionFailure
-                  |GetById |GetByIdSuccess |GetByIdFailure;
+                  |GetById |GetByIdSuccess |GetByIdFailure
+                  |GetTransactions |GetTransactionsSuccess |GetTransactionsFailure;

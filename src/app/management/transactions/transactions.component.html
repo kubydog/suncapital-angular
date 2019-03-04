@@ -1,3 +1,45 @@
-<p>
-  transactions works!
-</p>
+<div class="search">
+  <form (ngSubmit)="onSubmit()" class="searchForm">
+    <div class="form-group row">
+      <label for="firstName" class="col-sm-2 col-form-label">First Name:</label>
+      <div class="col-sm-2">
+        <input type="text" id="firstName" [formControl]="firstName" class="form-control">
+      </div>
+      <label for="lastName" class="col-sm-2 col-form-label">Last Name:</label>
+      <div class="col-sm-2">
+        <input type="text" id="lastName" [formControl]="lastName" class="form-control">
+      </div>
+      <button class="btn btn-sm btn-primary btn-block col-sm-2" type="submit">Search</button>
+    </div>
+  </form>
+</div>
+<div class="transactionTable">
+  <table class="table table-striped table-hover">
+    <thead class="thead-light">
+    <tr>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Identity</th>
+      <th scope="col">BirthDate</th>
+      <th scope="col">Phone</th>
+      <th scope="col">ReceiverName</th>
+      <th scope="col">ReceiverBank</th>
+      <th scope="col">ReceiverAccount</th>
+      <th scope="col">TransactionDate</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let transaction of transactions" (click)="onDetail(transaction._id)">
+      <td>{{transaction.firstName}}</td>
+      <td>{{transaction.lastName}}</td>
+      <td>{{transaction.identity}}</td>
+      <td>{{transaction.birthDate | date: 'yyyy/MM/dd'}}</td>
+      <td>{{transaction.phone}}</td>
+      <td>{{transaction.receiverName}}</td>
+      <td>{{transaction.receiverBank}}</td>
+      <td>{{transaction.receiverAccount}}</td>
+      <td>{{transaction.createDate | date: 'dd/MM/yyyy'}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
