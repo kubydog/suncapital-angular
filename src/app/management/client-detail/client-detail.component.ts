@@ -1,6 +1,6 @@
 import {Component, Injectable, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {Client} from '../../model/client';
-import {Store} from '@ngrx/store';
+import {ActionsSubject, Store} from '@ngrx/store';
 import {AppState, selectClientState} from '../../store/app.states';
 import {Observable, Subscription} from 'rxjs';
 import {GetClientById} from '../../store/client/client.actions';
@@ -10,7 +10,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {Account} from '../../model/account';
 import {Add, Delete, Edit} from '../../store/account/account.actions';
 import {Transaction} from '../../model/transaction';
-import {AddTransaction} from '../../store/transaction/transaction.actions';
+import {AddTransaction, TransactionActionTypes} from '../../store/transaction/transaction.actions';
 
 @Component({
   selector: 'app-client-detail',
@@ -38,7 +38,8 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
   constructor(private store: Store<AppState>,
               private route: ActivatedRoute,
               private modalService: BsModalService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private actionSubject: ActionsSubject) {
     this.clientState = this.store.select(selectClientState);
     this.accountForm = this.formBuilder.group({
       accountName: ['', Validators.required],
@@ -62,6 +63,11 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
       payAmount: [{value: '', disabled: true}],
       payCurrency: [''],
       fee: ['']
+    });
+    this.subject = actionSubject.subscribe( data => {
+      if (data.type === TransactionActionTypes.ADD_TRANSACTION_SUCCESS) {
+        this.transactionModal.hide();
+      }
     });
   }
 
