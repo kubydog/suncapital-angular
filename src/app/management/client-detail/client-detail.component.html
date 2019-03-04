@@ -111,47 +111,47 @@
       <div class="remittancer">
         <div class="form-group row">
           <label for="lastName" class="col-sm-4 col-form-label">姓LastName:</label>
-          <input id="lastName" formControlName="lastName" class="col-sm-8 form-control" type="text" disabled>
+          <input id="lastName" formControlName="lastName" class="col-sm-8 form-control" type="text">
         </div>
         <div class="form-group row">
           <label for="firstName" class="col-sm-4 col-form-label" >名FirstName:</label>
-          <input id="firstName" class="col-sm-8 form-control" formControlName="firstName" type="text" disabled>
+          <input id="firstName" class="col-sm-8 form-control" formControlName="firstName" type="text">
         </div>
         <div class="form-group row">
           <label for="birthDate" class="col-form-label col-sm-4">出生日前DOB:</label>
-          <input id="birthDate" formControlName="birthDate" class="col-sm-8 form-control" type="text" disabled>
+          <input id="birthDate" formControlName="birthDate" class="col-sm-8 form-control" type="text">
         </div>
         <div class="form-group row">
           <label for="phone" class="col-form-label col-sm-4">电话Phone:</label>
-          <input id="phone" formControlName="phone" class="col-sm-8 form-control" type="text" disabled>
+          <input id="phone" formControlName="phone" class="col-sm-8 form-control" type="text">
         </div>
         <div class="form-group row">
           <label for="identity" class="col-form-label col-sm-4">证件ID:</label>
-          <input id="identity" formControlName="identity" class="col-sm-8 form-control" type="text" disabled>
+          <input id="identity" formControlName="identity" class="col-sm-8 form-control" type="text">
         </div>
         <div class="form-group row">
           <label for="address" class="col-form-label col-sm-4">地址Address:</label>
-          <input id="address" formControlName="address" class="col-sm-8 form-control" type="text" disabled>
+          <input id="address" formControlName="address" class="col-sm-8 form-control" type="text">
         </div>
       </div>
       <div class="payee">
         <div class="form-group row">
           <label for="receiverBank" class="col-form-label col-sm-4">银行Bank:</label>
-          <input id="receiverBank" formControlName="receiverBank" class="form-control col-sm-8" type="text" disabled>
+          <input id="receiverBank" formControlName="receiverBank" class="form-control col-sm-8" type="text">
         </div>
         <div class="form-group row">
           <label for="receiverName" class="col-form-label col-sm-4">姓名Name:</label>
-          <input id="receiverName" formControlName="receiverName" class="form-control col-sm-8" type="text" disabled>
+          <input id="receiverName" formControlName="receiverName" class="form-control col-sm-8" type="text">
         </div>
         <div class="form-group row">
           <label for="receiverAccount" class="col-sm-4 col-form-label">账号A/C No:</label>
-          <input id="receiverAccount" formControlName="receiverAccount" class="form-control col-sm-8" type="text" disabled>
+          <input id="receiverAccount" formControlName="receiverAccount" class="form-control col-sm-8" type="text">
         </div>
       </div>
       <div class="exchange">
         <div class="form-group row">
-          <label for="receiveAmount" class="col-sm-4 col-form-label">当地货币金额:</label>
-          <input id="receiveAmount" formControlName="receiveAmount" class="form-control col-sm-6" type="text">
+          <label for="receiveAmount" class="col-sm-4 col-form-label" >当地货币金额:</label>
+          <input id="receiveAmount" formControlName="receiveAmount" class="form-control col-sm-6" type="number" (blur)="amountChange()">
           <select id="receiveCurrency" class="col-sm-2 form-control" type="s" formControlName="receiveCurrency">
             <option value="AUD">AUD</option>
             <option value="CNY">CNY</option>
@@ -161,11 +161,11 @@
         </div>
         <div class="form-group row">
           <label for="rate" class="col-form-label col-sm-4">汇率:</label>
-          <input id="rate" formControlName="rate" class="form-control col-sm-4">
+          <input id="rate" formControlName="rate" class="form-control col-sm-4" type="number" (blur)="rateChange()">
         </div>
         <div class="form-group row">
           <label for="payAmount" class="col-sm-4 col-form-label">应付货币金额:</label>
-          <input id="payAmount" formControlName="payAmount" class="form-control col-sm-6" type="text">
+          <input id="payAmount" formControlName="payAmount" class="form-control col-sm-6" type="number">
           <select id="payCurrency" class="col-sm-2 form-control" type="s" formControlName="payCurrency">
             <option value="AUD">AUD</option>
             <option value="CNY">CNY</option>
@@ -175,7 +175,7 @@
         </div>
         <div class="form-group row">
           <label for="fee" class="col-form-label col-sm-4">汇费:</label>
-          <input id="fee" formControlName="fee" class="form-control col-sm-4">
+          <input id="fee" formControlName="fee" class="form-control col-sm-4" type="number">
         </div>
       </div>
       <button type="submit" class="btn btn-lg btn-block btn-primary col-sm-4"> Create </button>

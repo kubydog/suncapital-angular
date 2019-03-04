@@ -9,6 +9,8 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Account} from '../../model/account';
 import {Add, Delete, Edit} from '../../store/account/account.actions';
+import {Transaction} from '../../model/transaction';
+import {AddTransaction} from '../../store/transaction/transaction.actions';
 
 @Component({
   selector: 'app-client-detail',
@@ -45,19 +47,19 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
       _id: ['']
     });
     this.transactionForm = this.formBuilder.group({
-      lastName: [''],
-      firstName: [''],
-      birthDate: [''],
-      phone: [''],
-      identity: [''],
-      address: [''],
-      receiverBank: [''],
-      receiverName: [''],
-      receiverAccount: [''],
+      lastName: [{value: '', disabled: true}],
+      firstName: [{value: '', disabled: true}],
+      birthDate: [{value: '', disabled: true}],
+      phone: [{value: '', disabled: true}],
+      identity: [{value: '', disabled: true}],
+      address: [{value: '', disabled: true}],
+      receiverBank: [{value: '', disabled: true}],
+      receiverName: [{value: '', disabled: true}],
+      receiverAccount: [{value: '', disabled: true}],
       receiveAmount: [''],
       receiveCurrency: [''],
       rate: [''],
-      payAmount: [''],
+      payAmount: [{value: '', disabled: true}],
       payCurrency: [''],
       fee: ['']
     });
@@ -138,8 +140,38 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
     // this.selectedAccount = null;
   }
 
-  onTransactionSubmit() {
+  amountChange() {
+    if (this.rate.value && this.rate.value !== '') {
+      this.payAmount.setValue(Number(this.rate.value) * Number(this.receiveAmount.value));
+    }
+  }
 
+  rateChange() {
+    if (this.receiveAmount.value && this.receiveAmount.value !== '') {
+      this.payAmount.setValue(Number(this.rate.value) * Number(this.receiveAmount.value));
+    }
+  }
+
+  onTransactionSubmit() {
+    const payload: Transaction = {
+      lastName: this.lastName.value,
+      firstName: this.firstName.value,
+      birthDate: this.birthDate.value,
+      phone: this.phone.value,
+      identity: this.identity.value,
+      address: this.address.value,
+      receiverBank: this.receiverBank.value,
+      receiverName: this.receiverName.value,
+      receiverAccount: this.receiverAccount.value,
+      receiveAmount: this.receiveAmount.value,
+      receiveCurrency: this.receiveCurrency.value,
+      payAmount: this.payAmount.value,
+      payCurrency: this.payCurrency.value,
+      rate: this.rate.value,
+      fee: this.fee.value
+    };
+
+    this.store.dispatch(new AddTransaction(payload));
   }
 
   get accountName() {
@@ -194,12 +226,12 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
     return this.transactionForm.get('receiverAccount');
   }
 
-  get receiverAmount() {
-    return this.transactionForm.get('receiverAmount');
+  get receiveAmount() {
+    return this.transactionForm.get('receiveAmount');
   }
 
-  get receiverCurrency() {
-    return this.transactionForm.get('receiverCurrency');
+  get receiveCurrency() {
+    return this.transactionForm.get('receiveCurrency');
   }
 
   get payAmount() {

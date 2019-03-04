@@ -25,7 +25,7 @@ export function reducer(state = initialState, action: All) {
     case AccountActionTypes.ADD_FAILURE: {
       return {
         ...state,
-        errorMessage: null
+        errorMessage: 'Failed to add account'
       };
     }
     case AccountActionTypes.GET_CLIENTID_SUCCESS: {

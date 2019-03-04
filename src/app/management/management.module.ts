@@ -15,6 +15,7 @@ import { ClientAddComponent } from './client-add/client-add.component';
 import { ClientDetailComponent } from './client-detail/client-detail.component';
 import { ClientEditComponent } from './client-edit/client-edit.component';
 import { AccountWindowComponent } from './account-window/account-window.component';
+import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { AccountWindowComponent } from './account-window/account-window.componen
     ClientAddComponent,
     ClientDetailComponent,
     ClientEditComponent,
-    AccountWindowComponent
+    AccountWindowComponent,
+    TransactionDetailComponent
   ]
 })
 export class ManagementModule { }

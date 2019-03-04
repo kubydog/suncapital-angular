@@ -8,6 +8,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import {ClientAddComponent} from './client-add/client-add.component';
 import {ClientDetailComponent} from './client-detail/client-detail.component';
 import {ClientEditComponent} from './client-edit/client-edit.component';
+import {TransactionDetailComponent} from './transaction-detail/transaction-detail.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
       {
         path: 'client/edit/:id',
         component: ClientEditComponent
+      },
+      {
+        path: 'transaction/:id',
+        component: TransactionDetailComponent
       }
     ]
   }
