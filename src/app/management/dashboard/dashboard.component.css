@@ -1,0 +1,9 @@
+.rate {
+  position: absolute;
+  left: 40%;
+  top: 30%;
+}
+
+caption {
+  caption-side: top;
+}
