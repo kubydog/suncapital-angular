@@ -3,5 +3,6 @@ export class Account {
   accountName?: string;
   accountNumber?: string;
   bank?: string;
+  receiverAddress?: string;
   clientId?: string;
 }

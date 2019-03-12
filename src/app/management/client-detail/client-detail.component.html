@@ -53,6 +53,7 @@
         <th scope="col">Account Name</th>
         <th scope="col">Account Number</th>
         <th scope="col">Bank</th>
+        <th scope="col">Address</th>
         <th scope="col">Options</th>
       </thead>
       <tbody>
@@ -60,6 +61,7 @@
             <td>{{account.accountName}}</td>
             <td>{{account.accountNumber}}</td>
             <td>{{account.bank}}</td>
+            <td>{{account.receiverAddress}}</td>
             <td class="row">
               <button alt="delete" class="col btn" (click)="onDelete(account._id)"><i class="far fa-trash-alt text-center"></i></button>
               <button alt="edit" class="col btn" (click)="onEdit(template,account)"><i class="far fa-edit"></i></button>
@@ -92,6 +94,10 @@
       <div class="form-group row">
         <label for="bank" class="col-form-label col-sm-4">Bank:</label>
         <input id="bank" formControlName="bank" class="form-control col-sm-8" type="text">
+      </div>
+      <div class="form-group row">
+        <label for="receiverAddress" class="col-form-label col-sm-4">Address:</label>
+        <input id="receiverAddress" formControlName="receiverAddress" class="form-control col-sm-8" type="text">
       </div>
       <button type="submit" class="btn btn-lg btn-block btn-primary col-sm-4"> Save </button>
     </form>

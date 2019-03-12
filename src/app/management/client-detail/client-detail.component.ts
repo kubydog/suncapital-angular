@@ -45,6 +45,7 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
       accountName: ['', Validators.required],
       accountNumber: ['', Validators.required],
       bank: ['', Validators.required],
+      receiverAddress: [''],
       _id: ['']
     });
     this.transactionForm = this.formBuilder.group({
@@ -97,6 +98,7 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
         accountName: this.accountName.value,
         accountNumber: this.accountNumber.value,
         bank: this.bank.value,
+        receiverAddress: this.receiverAddress.value,
         clientId: this.client._id
       }
       this.store.dispatch(new Add(payload));
@@ -107,6 +109,7 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
         accountName: this.accountName.value,
         accountNumber: this.accountNumber.value,
         bank: this.bank.value,
+        receiverAddress: this.receiverAddress.value,
         clientId: this.client._id
       };
       this.store.dispatch(new Edit(payload));
@@ -140,6 +143,7 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
       this.accountName.setValue(this.selectedAccount.accountName);
       this.accountNumber.setValue(this.selectedAccount.accountNumber);
       this.bank.setValue(this.selectedAccount.bank);
+      this.receiverAddress.setValue(this.selectedAccount.receiverAddress);
       this._id.setValue(this.selectedAccount._id);
     }
     this.modalRef = this.modalService.show(template, this.config);
@@ -254,6 +258,10 @@ export class ClientDetailComponent implements OnInit, OnDestroy {
 
   get fee() {
     return this.transactionForm.get('fee');
+  }
+
+  get receiverAddress() {
+    return this.accountForm.get('receiverAddress');
   }
 
   ngOnDestroy(): void {
