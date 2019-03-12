@@ -6,6 +6,7 @@ import {AppState, selectClientState} from '../../store/app.states';
 import {ActivatedRoute} from '@angular/router';
 import {Add, Edit, GetClientById} from '../../store/client/client.actions';
 import {FormBuilder, Validators} from '@angular/forms';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-client-edit',
@@ -48,11 +49,15 @@ export class ClientEditComponent implements OnInit {
     this.getState.subscribe(state => {
       this.client = state.currentClient;
       this.errorMessage = state.errorMessage;
+      const dp = new DatePipe(navigator.language);
+      const p = 'y-MM-dd';
+      const bod = dp.transform(this.client.birthDate, p);
+      const expireDate = dp.transform(this.client.identityExpireDate, p);
       this.editForm = this.formBuilder.group({
         firstName: [this.client.firstName, Validators.required],
         lastName: [this.client.lastName, Validators.required],
         chineseName: [this.client.chineseName],
-        birthDate: [this.client.birthDate, Validators.required],
+        birthDate: [bod, Validators.required],
         mobile: [this.client.mobile, Validators.required],
         address: [this.client.address, Validators.required],
         suburb: [this.client.suburb, Validators.required],
@@ -60,7 +65,7 @@ export class ClientEditComponent implements OnInit {
         postCode: [this.client.postCode, Validators.required],
         identityType: [this.client.identityType, Validators.required],
         identity: [this.client.identity, Validators.required],
-        identityExpireDate: [this.client.identityExpireDate],
+        identityExpireDate: [expireDate],
         identityImage: ['']
       });
     });
